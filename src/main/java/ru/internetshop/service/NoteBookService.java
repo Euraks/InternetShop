@@ -26,7 +26,7 @@ public interface NoteBookService {
      * @param id - ID NoteBook
      * @return - NoteBook for ID
      */
-    PersonalComputer read(int id);
+    NoteBook read(int id);
 
     /**
      * Update NoteBook for ID
