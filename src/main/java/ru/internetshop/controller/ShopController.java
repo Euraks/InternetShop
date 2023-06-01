@@ -21,20 +21,11 @@ import ru.internetshop.repository.PersonalComputerRepository;
 public class ShopController {
 
     @Autowired
-    NoteBookRepository noteBookRepository;
-
-    @Autowired
     MonitorRepository monitorRepository;
 
     @Autowired
     HardDriveRepository hardDriveRepository;
 
-
-    @PostMapping(value = "/NoteBooks")
-    public ResponseEntity<?> create(@RequestBody NoteBook noteBook) {
-        noteBookRepository.save(noteBook);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
 
     @PostMapping(value = "/Monitors")
     public ResponseEntity<?> create(@RequestBody Monitor monitor) {
