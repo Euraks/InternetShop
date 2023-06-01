@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.internetshop.model.PersonalComputer;
 import ru.internetshop.repository.PersonalComputerRepository;
+import ru.internetshop.service.impl.PersonalComputerServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,17 +15,17 @@ import java.util.Optional;
 @RequestMapping("/v01")
 public class PersonalComputersController {
     @Autowired
-    PersonalComputerRepository personalComputerRepository;
+    PersonalComputerServiceImpl personalComputerService;
 
     @PostMapping(value = "/PersonalComputers")
     public ResponseEntity<?> create(@RequestBody PersonalComputer personalComputer) {
-        personalComputerRepository.save(personalComputer);
+        personalComputerService.create(personalComputer);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/PersonalComputers")
     public ResponseEntity<List<PersonalComputer>> read() {
-        final List<PersonalComputer> personalComputers = personalComputerRepository.findAll();
+        final List<PersonalComputer> personalComputers = personalComputerService.readAll();
 
         return !personalComputers.isEmpty()
                 ? new ResponseEntity<>(personalComputers, HttpStatus.OK)
@@ -33,7 +34,7 @@ public class PersonalComputersController {
 
     @GetMapping(value = "/PersonalComputers/{id}")
     public ResponseEntity<PersonalComputer> read(@PathVariable(name = "id") long id) {
-        final Optional<PersonalComputer> personalComputer = personalComputerRepository.findById(id);
+        final Optional<PersonalComputer> personalComputer = personalComputerService.read(id);
 
         return personalComputer.map(computer ->
                 new ResponseEntity<>(computer, HttpStatus.OK)).orElseGet(() ->

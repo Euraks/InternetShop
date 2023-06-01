@@ -3,6 +3,7 @@ package ru.internetshop.service;
 import ru.internetshop.model.PersonalComputer;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonalComputerService {
     /**
@@ -25,7 +26,7 @@ public interface PersonalComputerService {
      * @param id - ID PersonalComputer
      * @return - PersonalComputer for ID
      */
-    PersonalComputer read(int id);
+    Optional<PersonalComputer> read(long id);
 
     /**
      * Update PersonalComputer for ID
