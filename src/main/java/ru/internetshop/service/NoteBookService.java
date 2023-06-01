@@ -4,6 +4,7 @@ import ru.internetshop.model.NoteBook;
 import ru.internetshop.model.PersonalComputer;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface NoteBookService {
     /**
@@ -26,7 +27,7 @@ public interface NoteBookService {
      * @param id - ID NoteBook
      * @return - NoteBook for ID
      */
-    NoteBook read(int id);
+    Optional<NoteBook> read(long id);
 
     /**
      * Update NoteBook for ID
@@ -35,6 +36,6 @@ public interface NoteBookService {
      * @param id     - id NoteBook to update
      * @return - true if data have been updated, else false
      */
-    boolean update(NoteBook noteBook, int id);
+    boolean update(NoteBook noteBook, long id);
 
 }
