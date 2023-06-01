@@ -8,6 +8,7 @@ import ru.internetshop.model.PersonalComputer;
 import ru.internetshop.repository.PersonalComputerRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v01")
@@ -28,5 +29,14 @@ public class PersonalComputersController {
         return !personalComputers.isEmpty()
                 ? new ResponseEntity<>(personalComputers, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/PersonalComputers/{id}")
+    public ResponseEntity<PersonalComputer> read(@PathVariable(name = "id") long id) {
+        final Optional<PersonalComputer> personalComputer = personalComputerRepository.findById(id);
+
+        return personalComputer.map(computer ->
+                new ResponseEntity<>(computer, HttpStatus.OK)).orElseGet(() ->
+                new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
