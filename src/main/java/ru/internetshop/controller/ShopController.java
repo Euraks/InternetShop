@@ -21,9 +21,6 @@ import ru.internetshop.repository.PersonalComputerRepository;
 public class ShopController {
 
     @Autowired
-    PersonalComputerRepository personalComputerRepository;
-
-    @Autowired
     NoteBookRepository noteBookRepository;
 
     @Autowired
@@ -32,11 +29,6 @@ public class ShopController {
     @Autowired
     HardDriveRepository hardDriveRepository;
 
-    @PostMapping(value = "/PersonalComputers")
-    public ResponseEntity<?> create(@RequestBody PersonalComputer personalComputer) {
-        personalComputerRepository.save(personalComputer);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
 
     @PostMapping(value = "/NoteBooks")
     public ResponseEntity<?> create(@RequestBody NoteBook noteBook) {
