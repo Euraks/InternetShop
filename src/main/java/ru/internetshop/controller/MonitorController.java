@@ -9,6 +9,7 @@ import ru.internetshop.model.NoteBook;
 import ru.internetshop.repository.MonitorRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v01")
@@ -25,10 +26,19 @@ public class MonitorController {
 
     @GetMapping(value = "/Monitors")
     public ResponseEntity<List<Monitor>> read() {
-        final List<Monitor> personalComputers = monitorRepository.findAll();
+        final List<Monitor> monitor = monitorRepository.findAll();
 
-        return !personalComputers.isEmpty()
-                ? new ResponseEntity<>(personalComputers, HttpStatus.OK)
+        return !monitor.isEmpty()
+                ? new ResponseEntity<>(monitor, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/Monitors/{id}")
+    public ResponseEntity<Monitor> read(@PathVariable(name = "id") long id) {
+        final Optional<Monitor> monitor = monitorRepository.findById(id);
+
+        return monitor.map(mon ->
+                new ResponseEntity<>(mon, HttpStatus.OK)).orElseGet(() ->
+                new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

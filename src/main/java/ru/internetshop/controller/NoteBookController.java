@@ -35,10 +35,10 @@ public class NoteBookController {
 
     @GetMapping(value = "/NoteBooks/{id}")
     public ResponseEntity<NoteBook> read(@PathVariable(name = "id") long id) {
-        final Optional<NoteBook> personalComputer = noteBookRepository.findById(id);
+        final Optional<NoteBook> noteBook = noteBookRepository.findById(id);
 
-        return personalComputer.map(noteBook ->
-                new ResponseEntity<>(noteBook, HttpStatus.OK)).orElseGet(() ->
+        return noteBook.map(book ->
+                new ResponseEntity<>(book, HttpStatus.OK)).orElseGet(() ->
                 new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
