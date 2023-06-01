@@ -8,17 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.internetshop.model.HardDrive;
-import ru.internetshop.model.Monitor;
-import ru.internetshop.model.NoteBook;
-import ru.internetshop.model.PersonalComputer;
 import ru.internetshop.repository.HardDriveRepository;
-import ru.internetshop.repository.MonitorRepository;
-import ru.internetshop.repository.NoteBookRepository;
-import ru.internetshop.repository.PersonalComputerRepository;
 
 @RestController
 @RequestMapping("/v01")
-public class ShopController {
+public class HardDriveController {
 
     @Autowired
     HardDriveRepository hardDriveRepository;
