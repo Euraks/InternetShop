@@ -29,6 +29,4 @@ public class PersonalComputersController {
                 ? new ResponseEntity<>(personalComputers, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
-
 }
