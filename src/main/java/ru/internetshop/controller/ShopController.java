@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.internetshop.model.HardDrive;
+import ru.internetshop.model.Monitor;
 import ru.internetshop.model.NoteBook;
 import ru.internetshop.model.PersonalComputer;
+import ru.internetshop.repository.HardDriveRepository;
+import ru.internetshop.repository.MonitorRepository;
 import ru.internetshop.repository.NoteBookRepository;
 import ru.internetshop.repository.PersonalComputerRepository;
 
@@ -22,6 +26,12 @@ public class ShopController {
     @Autowired
     NoteBookRepository noteBookRepository;
 
+    @Autowired
+    MonitorRepository monitorRepository;
+
+    @Autowired
+    HardDriveRepository hardDriveRepository;
+
     @PostMapping(value = "/PersonalComputers")
     public ResponseEntity<?> create(@RequestBody PersonalComputer personalComputer) {
         personalComputerRepository.save(personalComputer);
@@ -33,4 +43,17 @@ public class ShopController {
         noteBookRepository.save(noteBook);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PostMapping(value = "/Monitors")
+    public ResponseEntity<?> create(@RequestBody Monitor monitor) {
+        monitorRepository.save(monitor);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/HardDrives")
+    public ResponseEntity<?> create(@RequestBody HardDrive hardDrive) {
+        hardDriveRepository.save(hardDrive);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
 }
