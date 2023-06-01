@@ -5,6 +5,7 @@ import ru.internetshop.model.NoteBook;
 import ru.internetshop.model.PersonalComputer;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MonitorService {
     /**
@@ -27,7 +28,7 @@ public interface MonitorService {
      * @param id - ID Monitor
      * @return - Monitor for ID
      */
-    Monitor read(int id);
+    Optional<Monitor> read(long id);
 
     /**
      * Update NoteBook for ID
