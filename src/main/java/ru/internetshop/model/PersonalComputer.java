@@ -1,10 +1,13 @@
 package ru.internetshop.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class PersonalComputer extends Product{
+@Entity
+@Table(name = "PersonalComputer")
+public class PersonalComputer extends Product {
     private String formFactor;
 }
