@@ -12,7 +12,7 @@ public abstract class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "Serial_Number")
-    private int serialNumber;
+    private String serialNumber;
     @Column(name = "Company")
     private String company;
     @Column(name = "Price")
