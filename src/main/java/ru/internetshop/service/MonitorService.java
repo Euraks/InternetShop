@@ -33,7 +33,7 @@ public interface MonitorService {
      * Update NoteBook for ID
      *
      * @param monitor - Monitor where to update the data
-     * @param id     - id NoteBook to update
+     * @param id     - id Monitor to update
      * @return - true if data have been updated, else false
      */
     boolean update(Monitor monitor, int id);
