@@ -10,6 +10,7 @@ import lombok.Data;
 @Entity
 @Table(name = "PersonalComputer")
 public class PersonalComputer extends Product {
+
     @Column(name = "Form-Factor")
     private String formFactor;
 }

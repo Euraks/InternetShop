@@ -9,6 +9,7 @@ import lombok.Data;
 @Entity
 @Table(name = "NoteBook")
 public class NoteBook extends Product {
+
     @Column(name = "Size")
     private int size;
 }

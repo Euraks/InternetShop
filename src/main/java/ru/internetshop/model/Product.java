@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @MappedSuperclass
 public abstract class Product {
+
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
