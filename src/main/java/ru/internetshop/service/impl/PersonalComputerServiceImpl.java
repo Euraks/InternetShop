@@ -32,6 +32,11 @@ public class PersonalComputerServiceImpl implements ServiceInterface<PersonalCom
 
     @Override
     public boolean update(PersonalComputer personalComputer, long id) {
+        if (repository.findById(id).isPresent()){
+            personalComputer.setId(id);
+            repository.save(personalComputer);
+            return true;
+        }
         return false;
     }
 }

@@ -39,4 +39,12 @@ public class PersonalComputersController {
                 new ResponseEntity<>(computer, HttpStatus.OK)).orElseGet(() ->
                 new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    @PutMapping(value = "/PersonalComputers/{id}")
+    public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody PersonalComputer personalComputer) {
+        final boolean updated = personalComputerService.update(personalComputer, id);
+
+        return updated
+                ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
 }
