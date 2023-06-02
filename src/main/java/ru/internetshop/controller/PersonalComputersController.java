@@ -34,7 +34,7 @@ public class PersonalComputersController {
     @Operation(
             summary = "Get All a Personal Computer",
             description = "Get All Personal Computer",
-            tags = { "Get All Personal Computer", "get" })
+            tags = {"Get All Personal Computer", "get"})
     @GetMapping(value = "/PersonalComputers")
     public ResponseEntity<List<PersonalComputer>> read() {
         final List<PersonalComputer> personalComputers = personalComputerService.readAll();
@@ -47,7 +47,7 @@ public class PersonalComputersController {
     @Operation(
             summary = "Get a Personal Computer for Id",
             description = "Get a Personal Computer for Id to request param",
-            tags = { "Get Personal Computer for Id", "get" })
+            tags = {"Get Personal Computer for Id", "get"})
     @GetMapping(value = "/PersonalComputers/{id}")
     public ResponseEntity<PersonalComputer> read(@PathVariable(name = "id") long id) {
         final Optional<PersonalComputer> personalComputer = personalComputerService.read(id);
@@ -61,7 +61,7 @@ public class PersonalComputersController {
             summary = "Update a Personal Computer for Id",
             description = "Update a Personal Computer object by adding its fields to the body request," +
                     " the JSON format according to the model and Id to request param",
-            tags = { "Update Personal Computer for Id", "put" })
+            tags = {"Update Personal Computer for Id", "put"})
     @PutMapping(value = "/PersonalComputers/{id}")
     public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody PersonalComputer personalComputer) {
         final boolean updated = personalComputerService.update(personalComputer, id);
