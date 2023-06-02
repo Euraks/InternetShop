@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.internetshop.model.NoteBook;
+import ru.internetshop.model.PersonalComputer;
 import ru.internetshop.service.ServiceInterface;
 
 import java.util.List;
@@ -39,5 +40,14 @@ public class NoteBookController {
         return noteBook.map(book ->
                 new ResponseEntity<>(book, HttpStatus.OK)).orElseGet(() ->
                 new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PutMapping(value = "/NoteBooks/{id}")
+    public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody NoteBook noteBook) {
+        final boolean updated = noteBookService.update(noteBook, id);
+
+        return updated
+                ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 }

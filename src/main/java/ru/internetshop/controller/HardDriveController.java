@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.internetshop.model.HardDrive;
+import ru.internetshop.model.Monitor;
 import ru.internetshop.service.impl.HardDriveServiceInterfaceImpl;
 
 import java.util.List;
@@ -38,5 +39,14 @@ public class HardDriveController {
         return hardDrive.map(hard ->
                 new ResponseEntity<>(hard, HttpStatus.OK)).orElseGet(() ->
                 new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PutMapping(value = "/HardDrives/{id}")
+    public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody HardDrive hardDrive) {
+        final boolean updated = hardDriveService.update(hardDrive, id);
+
+        return updated
+                ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 }
