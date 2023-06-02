@@ -3,7 +3,6 @@ package ru.internetshop.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.internetshop.model.NoteBook;
-import ru.internetshop.model.PersonalComputer;
 import ru.internetshop.repository.NoteBookRepository;
 import ru.internetshop.service.ServiceInterface;
 
@@ -33,7 +32,7 @@ public class NoteBookServiceInterfaceImpl implements ServiceInterface<NoteBook> 
 
     @Override
     public boolean update(NoteBook noteBook, long id) {
-        if (repository.findById(id).isPresent()){
+        if (repository.findById(id).isPresent()) {
             noteBook.setId(id);
             repository.save(noteBook);
             return true;
@@ -43,7 +42,7 @@ public class NoteBookServiceInterfaceImpl implements ServiceInterface<NoteBook> 
 
     @Override
     public boolean delete(long id) {
-        if (repository.findById(id).isPresent()){
+        if (repository.findById(id).isPresent()) {
             repository.deleteById(id);
             return true;
         }

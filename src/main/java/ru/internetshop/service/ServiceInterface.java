@@ -1,6 +1,5 @@
 package ru.internetshop.service;
 
-import ru.internetshop.model.PersonalComputer;
 import ru.internetshop.model.Product;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public interface ServiceInterface<T extends Product> {
      * Update <T> for ID
      *
      * @param type - <T> where to update the data
-     * @param id     - id <T> to update
+     * @param id   - id <T> to update
      * @return - true if data have been updated, else false
      */
     boolean update(T type, long id);

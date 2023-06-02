@@ -3,7 +3,6 @@ package ru.internetshop.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.internetshop.model.HardDrive;
-import ru.internetshop.model.Monitor;
 import ru.internetshop.repository.HardDriveRepository;
 import ru.internetshop.service.ServiceInterface;
 
@@ -17,7 +16,7 @@ public class HardDriveServiceInterfaceImpl implements ServiceInterface<HardDrive
     HardDriveRepository repository;
 
     @Override
-    public void  create(HardDrive type) {
+    public void create(HardDrive type) {
         repository.save(type);
     }
 
@@ -33,7 +32,7 @@ public class HardDriveServiceInterfaceImpl implements ServiceInterface<HardDrive
 
     @Override
     public boolean update(HardDrive hardDrive, long id) {
-        if (repository.findById(id).isPresent()){
+        if (repository.findById(id).isPresent()) {
             hardDrive.setId(id);
             repository.save(hardDrive);
             return true;
@@ -43,7 +42,7 @@ public class HardDriveServiceInterfaceImpl implements ServiceInterface<HardDrive
 
     @Override
     public boolean delete(long id) {
-        if (repository.findById(id).isPresent()){
+        if (repository.findById(id).isPresent()) {
             repository.deleteById(id);
             return true;
         }
