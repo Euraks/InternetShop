@@ -3,16 +3,16 @@ package ru.internetshop.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.internetshop.model.NoteBook;
-import ru.internetshop.repository.NoteBookRepository;
-import ru.internetshop.service.NoteBookService;
+import ru.internetshop.repository.RepositoryByTypeProduct;
+import ru.internetshop.service.ServiceInterface;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class NoteBookServiceImpl implements NoteBookService {
+public class NoteBookServiceInterfaceImpl implements ServiceInterface<NoteBook> {
     @Autowired
-    NoteBookRepository repository;
+    RepositoryByTypeProduct<NoteBook> repository;
 
     @Override
     public void create(NoteBook noteBook) {
