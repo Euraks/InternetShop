@@ -40,4 +40,13 @@ public class HardDriveServiceInterfaceImpl implements ServiceInterface<HardDrive
         }
         return false;
     }
+
+    @Override
+    public boolean delete(long id) {
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

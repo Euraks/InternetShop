@@ -40,4 +40,13 @@ public class NoteBookServiceInterfaceImpl implements ServiceInterface<NoteBook> 
         }
         return false;
     }
+
+    @Override
+    public boolean delete(long id) {
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

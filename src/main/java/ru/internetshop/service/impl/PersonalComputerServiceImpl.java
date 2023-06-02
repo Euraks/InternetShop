@@ -39,4 +39,13 @@ public class PersonalComputerServiceImpl implements ServiceInterface<PersonalCom
         }
         return false;
     }
+
+    @Override
+    public boolean delete(long id) {
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
