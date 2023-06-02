@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.internetshop.model.HardDrive;
-import ru.internetshop.model.Monitor;
 import ru.internetshop.service.impl.HardDriveServiceInterfaceImpl;
 
 import java.util.List;
@@ -23,6 +22,7 @@ public class HardDriveController {
         hardDriveService.create(hardDrive);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
     @GetMapping(value = "/HardDrives")
     public ResponseEntity<List<HardDrive>> read() {
         final List<HardDrive> personalComputers = hardDriveService.readAll();
@@ -46,6 +46,15 @@ public class HardDriveController {
         final boolean updated = hardDriveService.update(hardDrive, id);
 
         return updated
+                ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
+
+    @DeleteMapping(value = "/HardDrives/{id}")
+    public ResponseEntity<?> delete(@PathVariable(name = "id") int id) {
+        final boolean deleted = hardDriveService.delete(id);
+
+        return deleted
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }

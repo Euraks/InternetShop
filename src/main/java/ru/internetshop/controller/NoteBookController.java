@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.internetshop.model.NoteBook;
-import ru.internetshop.model.PersonalComputer;
 import ru.internetshop.service.ServiceInterface;
 
 import java.util.List;
@@ -47,6 +46,15 @@ public class NoteBookController {
         final boolean updated = noteBookService.update(noteBook, id);
 
         return updated
+                ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
+
+    @DeleteMapping(value = "/NoteBooks/{id}")
+    public ResponseEntity<?> delete(@PathVariable(name = "id") int id) {
+        final boolean deleted = noteBookService.delete(id);
+
+        return deleted
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }

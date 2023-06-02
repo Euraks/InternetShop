@@ -39,11 +39,21 @@ public class PersonalComputersController {
                 new ResponseEntity<>(computer, HttpStatus.OK)).orElseGet(() ->
                 new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @PutMapping(value = "/PersonalComputers/{id}")
     public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody PersonalComputer personalComputer) {
         final boolean updated = personalComputerService.update(personalComputer, id);
 
         return updated
+                ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
+
+    @DeleteMapping(value = "/PersonalComputers/{id}")
+    public ResponseEntity<?> delete(@PathVariable(name = "id") int id) {
+        final boolean deleted = personalComputerService.delete(id);
+
+        return deleted
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
