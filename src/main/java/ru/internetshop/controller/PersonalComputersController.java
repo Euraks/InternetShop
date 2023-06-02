@@ -19,7 +19,6 @@ import java.util.Optional;
 public class PersonalComputersController {
     @Autowired
     ServiceInterface<PersonalComputer> personalComputerService;
-
     @Operation(
             summary = "Add a Personal Computer",
             description = "Add a Personal Computer object by adding its fields to the body request," +
