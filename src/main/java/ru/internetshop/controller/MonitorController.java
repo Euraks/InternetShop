@@ -5,8 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.internetshop.model.Monitor;
-import ru.internetshop.model.NoteBook;
-import ru.internetshop.repository.MonitorRepository;
+import ru.internetshop.service.ServiceInterface;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,17 +15,17 @@ import java.util.Optional;
 public class MonitorController {
 
     @Autowired
-    MonitorRepository monitorRepository;
+    ServiceInterface<Monitor> monitorService;
 
     @PostMapping(value = "/Monitors")
     public ResponseEntity<?> create(@RequestBody Monitor monitor) {
-        monitorRepository.save(monitor);
+        monitorService.create(monitor);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/Monitors")
     public ResponseEntity<List<Monitor>> read() {
-        final List<Monitor> monitor = monitorRepository.findAll();
+        final List<Monitor> monitor = monitorService.readAll();
 
         return !monitor.isEmpty()
                 ? new ResponseEntity<>(monitor, HttpStatus.OK)
@@ -35,7 +34,7 @@ public class MonitorController {
 
     @GetMapping(value = "/Monitors/{id}")
     public ResponseEntity<Monitor> read(@PathVariable(name = "id") long id) {
-        final Optional<Monitor> monitor = monitorRepository.findById(id);
+        final Optional<Monitor> monitor = monitorService.read(id);
 
         return monitor.map(mon ->
                 new ResponseEntity<>(mon, HttpStatus.OK)).orElseGet(() ->

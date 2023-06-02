@@ -5,8 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.internetshop.model.NoteBook;
-import ru.internetshop.model.PersonalComputer;
-import ru.internetshop.repository.NoteBookRepository;
+import ru.internetshop.service.ServiceInterface;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,17 +15,17 @@ import java.util.Optional;
 public class NoteBookController {
 
     @Autowired
-    NoteBookRepository noteBookRepository;
+    ServiceInterface<NoteBook> noteBookService;
 
     @PostMapping(value = "/NoteBooks")
     public ResponseEntity<?> create(@RequestBody NoteBook noteBook) {
-        noteBookRepository.save(noteBook);
+        noteBookService.create(noteBook);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/NoteBooks")
     public ResponseEntity<List<NoteBook>> read() {
-        final List<NoteBook> personalComputers = noteBookRepository.findAll();
+        final List<NoteBook> personalComputers = noteBookService.readAll();
 
         return !personalComputers.isEmpty()
                 ? new ResponseEntity<>(personalComputers, HttpStatus.OK)
@@ -35,7 +34,7 @@ public class NoteBookController {
 
     @GetMapping(value = "/NoteBooks/{id}")
     public ResponseEntity<NoteBook> read(@PathVariable(name = "id") long id) {
-        final Optional<NoteBook> noteBook = noteBookRepository.findById(id);
+        final Optional<NoteBook> noteBook = noteBookService.read(id);
 
         return noteBook.map(book ->
                 new ResponseEntity<>(book, HttpStatus.OK)).orElseGet(() ->

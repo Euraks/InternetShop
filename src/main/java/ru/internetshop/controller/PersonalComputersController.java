@@ -5,8 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.internetshop.model.PersonalComputer;
-import ru.internetshop.repository.PersonalComputerRepository;
-import ru.internetshop.service.impl.PersonalComputerServiceImpl;
+import ru.internetshop.service.ServiceInterface;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,7 @@ import java.util.Optional;
 @RequestMapping("/v01")
 public class PersonalComputersController {
     @Autowired
-    PersonalComputerServiceImpl personalComputerService;
+    ServiceInterface<PersonalComputer> personalComputerService;
 
     @PostMapping(value = "/PersonalComputers")
     public ResponseEntity<?> create(@RequestBody PersonalComputer personalComputer) {

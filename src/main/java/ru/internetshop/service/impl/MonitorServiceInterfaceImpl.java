@@ -3,7 +3,7 @@ package ru.internetshop.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.internetshop.model.Monitor;
-import ru.internetshop.repository.RepositoryByTypeProduct;
+import ru.internetshop.repository.MonitorRepository;
 import ru.internetshop.service.ServiceInterface;
 
 import java.util.List;
@@ -11,8 +11,9 @@ import java.util.Optional;
 
 @Service
 public class MonitorServiceInterfaceImpl implements ServiceInterface<Monitor> {
+
     @Autowired
-    RepositoryByTypeProduct<Monitor> repository;
+    MonitorRepository repository;
 
     @Override
     public void create(Monitor monitor) {

@@ -5,8 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.internetshop.model.HardDrive;
-import ru.internetshop.model.Monitor;
-import ru.internetshop.repository.HardDriveRepository;
+import ru.internetshop.service.impl.HardDriveServiceInterfaceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,16 +15,16 @@ import java.util.Optional;
 public class HardDriveController {
 
     @Autowired
-    HardDriveRepository hardDriveRepository;
+    HardDriveServiceInterfaceImpl hardDriveService;
 
     @PostMapping(value = "/HardDrives")
     public ResponseEntity<?> create(@RequestBody HardDrive hardDrive) {
-        hardDriveRepository.save(hardDrive);
+        hardDriveService.create(hardDrive);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @GetMapping(value = "/HardDrives")
     public ResponseEntity<List<HardDrive>> read() {
-        final List<HardDrive> personalComputers = hardDriveRepository.findAll();
+        final List<HardDrive> personalComputers = hardDriveService.readAll();
 
         return !personalComputers.isEmpty()
                 ? new ResponseEntity<>(personalComputers, HttpStatus.OK)
@@ -34,7 +33,7 @@ public class HardDriveController {
 
     @GetMapping(value = "/HardDrives/{id}")
     public ResponseEntity<HardDrive> read(@PathVariable(name = "id") long id) {
-        final Optional<HardDrive> hardDrive = hardDriveRepository.findById(id);
+        final Optional<HardDrive> hardDrive = hardDriveService.read(id);
 
         return hardDrive.map(hard ->
                 new ResponseEntity<>(hard, HttpStatus.OK)).orElseGet(() ->
