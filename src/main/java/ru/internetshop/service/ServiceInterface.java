@@ -30,11 +30,19 @@ public interface ServiceInterface<T extends Product> {
     Optional<T> read(long id);
 
     /**
-     * Update PersonalComputer for ID
+     * Update <T> for ID
      *
      * @param type - <T> where to update the data
      * @param id     - id <T> to update
      * @return - true if data have been updated, else false
      */
     boolean update(T type, long id);
+
+    /**
+     * Delete <T> с заданным ID
+     *
+     * @param id - <T> where to delete
+     * @return - true if <T> delete, else false
+     */
+    boolean delete(long id);
 }
