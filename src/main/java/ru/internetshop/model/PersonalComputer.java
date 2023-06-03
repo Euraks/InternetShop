@@ -15,12 +15,13 @@ public class PersonalComputer extends Product {
 
     @Column(name = "Form-Factor")
     private String formFactor;
-
-    public PersonalComputer(String serial, String company, int price, int quantity, String formFactor) {
-      this.setSerialNumber(serial);
-      this.setCompany(company);
-      this.setPrice(price);
-      this.setQuantity(quantity);
-      this.setFormFactor(formFactor);
+    public PersonalComputer(Long id,String serial, String company, int price, int quantity, String formFactor) {
+        this.setId(id);
+        this.setSerialNumber(serial);
+        this.setCompany(company);
+        this.setPrice(price);
+        this.setQuantity(quantity);
+        this.setFormFactor(formFactor);
     }
+
 }
