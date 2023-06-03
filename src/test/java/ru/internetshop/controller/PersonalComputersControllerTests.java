@@ -69,19 +69,19 @@ public class PersonalComputersControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(3)))
-                .andExpect(jsonPath("$[0].id", is(1L)))
+                .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[0].serialNumber", is("SER01-001")))
                 .andExpect(jsonPath("$[0].company", is("Intel")))
                 .andExpect(jsonPath("$[0].price", is(10000)))
                 .andExpect(jsonPath("$[0].quantity", is(1)))
                 .andExpect(jsonPath("$[0].formFactor", is("PC")))
-                .andExpect(jsonPath("$[0].id", is(2L)))
+                .andExpect(jsonPath("$[1].id", is(2)))
                 .andExpect(jsonPath("$[1].serialNumber", is("SER01-002")))
                 .andExpect(jsonPath("$[1].company", is("Spectrum")))
                 .andExpect(jsonPath("$[1].price", is(20000)))
                 .andExpect(jsonPath("$[1].quantity", is(1)))
                 .andExpect(jsonPath("$[1].formFactor", is("PC")))
-                .andExpect(jsonPath("$[0].id", is(3L)))
+                .andExpect(jsonPath("$[2].id", is(3)))
                 .andExpect(jsonPath("$[2].serialNumber", is("SER01-003")))
                 .andExpect(jsonPath("$[2].company", is("Mac")))
                 .andExpect(jsonPath("$[2].price", is(30000)))
@@ -107,7 +107,6 @@ public class PersonalComputersControllerTests {
                 .andExpect(jsonPath("$.price", is(10000)))
                 .andExpect(jsonPath("$.quantity", is(1)))
                 .andExpect(jsonPath("$.formFactor", is("PC")));
-
     }
 
     @Test
