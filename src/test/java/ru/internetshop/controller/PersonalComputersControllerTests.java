@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.internetshop.model.PersonalComputer;
@@ -86,6 +87,27 @@ public class PersonalComputersControllerTests {
                 .andExpect(jsonPath("$[2].price", is(30000)))
                 .andExpect(jsonPath("$[2].quantity", is(1)))
                 .andExpect(jsonPath("$[2].formFactor", is("PC")));
+    }
+
+    @Test
+    @DisplayName("GET /v01/PersonalComputers/1")
+    void testGetWidgetById() throws Exception {
+        PersonalComputer personalComputer = new PersonalComputer(1L, "SER01-001", "Intel", 10000, 1, "PC");
+
+        doReturn(personalComputer).when(personalComputerRepository).save(personalComputer);
+        doReturn(Optional.of(personalComputer)).when(computerService).read(1L);
+
+
+        mockMvc.perform(get("/v01/PersonalComputers/{id}", 1L))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.serialNumber", is("SER01-001")))
+                .andExpect(jsonPath("$.company", is("Intel")))
+                .andExpect(jsonPath("$.price", is(10000)))
+                .andExpect(jsonPath("$.quantity", is(1)))
+                .andExpect(jsonPath("$.formFactor", is("PC")));
+
     }
 
     @Test
