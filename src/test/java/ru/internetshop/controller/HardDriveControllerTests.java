@@ -1,6 +1,5 @@
 package ru.internetshop.controller;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
@@ -11,9 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.internetshop.model.NoteBook;
-import ru.internetshop.repository.NoteBookRepository;
-import ru.internetshop.service.impl.NoteBookServiceInterfaceImpl;
+import ru.internetshop.model.HardDrive;
+import ru.internetshop.repository.HardDriveRepository;
+import ru.internetshop.service.impl.HardDriveServiceInterfaceImpl;
 
 import java.util.Optional;
 
@@ -26,27 +25,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class NoteBookControllerTests {
+public class HardDriveControllerTests {
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    NoteBookServiceInterfaceImpl noteBookService;
+    HardDriveServiceInterfaceImpl hardDriveService;
 
     @MockBean
-    NoteBookRepository noteBookRepository;
+    HardDriveRepository hardDriveRepository;
 
 
     @Test
-    @DisplayName("POST /v01/NoteBooks")
-    void testCreateNoteBooks() throws Exception {
-        NoteBook noteBook = new NoteBook(1L, "SER01-001", "Intel", 10000, 1, 14);
-        doReturn(noteBook).when(noteBookService).create(any());
-        mockMvc.perform(post("/v01/NoteBooks")
+    @DisplayName("POST /v01/HardDrives")
+    void testCreateHardDrives() throws Exception {
+        HardDrive hardDrive = new HardDrive(1L, "SER01-001", "Intel", 10000, 1, 14);
+        doReturn(hardDrive).when(hardDriveService).create(any());
+        mockMvc.perform(post("/v01/HardDrives")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(noteBook)))
+                        .content(asJsonString(hardDrive)))
 
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -54,15 +53,15 @@ public class NoteBookControllerTests {
     }
 
     @Test
-    @DisplayName("GET /v01/NoteBooks")
-    void testGetNoteBooksSuccess() throws Exception {
-        NoteBook noteBook = new NoteBook(1L, "SER01-001", "Intel", 10000, 1, 14);
-        NoteBook noteBookOne = new NoteBook(2L, "SER01-002", "Mac", 20000, 1, 13);
-        NoteBook noteBookTwo = new NoteBook(3L, "SER01-003", "Mac Pro", 30000, 1, 17);
+    @DisplayName("GET /v01/HardDrives")
+    void testGetHardDrivesSuccess() throws Exception {
+        HardDrive hardDrive = new HardDrive(1L, "SER01-001", "Intel", 10000, 1, 14);
+        HardDrive hardDriveOne = new HardDrive(2L, "SER01-002", "Mac", 20000, 1, 13);
+        HardDrive hardDriveTwo = new HardDrive(3L, "SER01-003", "Mac Pro", 30000, 1, 17);
 
-        doReturn(Lists.newArrayList(noteBook, noteBookOne, noteBookTwo)).when(noteBookService).readAll();
+        doReturn(Lists.newArrayList(hardDrive, hardDriveOne, hardDriveTwo)).when(hardDriveService).readAll();
 
-        mockMvc.perform(get("/v01/NoteBooks"))
+        mockMvc.perform(get("/v01/HardDrives"))
 
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -72,31 +71,31 @@ public class NoteBookControllerTests {
                 .andExpect(jsonPath("$[0].company", is("Intel")))
                 .andExpect(jsonPath("$[0].price", is(10000)))
                 .andExpect(jsonPath("$[0].quantity", is(1)))
-                .andExpect(jsonPath("$[0].size", is(14)))
+                .andExpect(jsonPath("$[0].capacity", is(14)))
                 .andExpect(jsonPath("$[1].id", is(2)))
                 .andExpect(jsonPath("$[1].serialNumber", is("SER01-002")))
                 .andExpect(jsonPath("$[1].company", is("Mac")))
                 .andExpect(jsonPath("$[1].price", is(20000)))
                 .andExpect(jsonPath("$[1].quantity", is(1)))
-                .andExpect(jsonPath("$[1].size", is(13)))
+                .andExpect(jsonPath("$[1].capacity", is(13)))
                 .andExpect(jsonPath("$[2].id", is(3)))
                 .andExpect(jsonPath("$[2].serialNumber", is("SER01-003")))
                 .andExpect(jsonPath("$[2].company", is("Mac Pro")))
                 .andExpect(jsonPath("$[2].price", is(30000)))
                 .andExpect(jsonPath("$[2].quantity", is(1)))
-                .andExpect(jsonPath("$[2].size", is(17)));
+                .andExpect(jsonPath("$[2].capacity", is(17)));
     }
 
     @Test
-    @DisplayName("GET /v01/NoteBooks/1")
-    void testGetNoteBooksById() throws Exception {
-        NoteBook noteBook = new NoteBook(1L, "SER01-001", "Intel", 10000, 1, 14);
+    @DisplayName("GET /v01/HardDrives/1")
+    void testGetHardDrivesById() throws Exception {
+        HardDrive hardDrive = new HardDrive(1L, "SER01-001", "Intel", 10000, 1, 150);
 
-        doReturn(noteBook).when(noteBookRepository).save(noteBook);
-        doReturn(Optional.of(noteBook)).when(noteBookService).read(1L);
+        doReturn(hardDrive).when(hardDriveRepository).save(hardDrive);
+        doReturn(Optional.of(hardDrive)).when(hardDriveService).read(1L);
 
 
-        mockMvc.perform(get("/v01/NoteBooks/{id}", 1L))
+        mockMvc.perform(get("/v01/HardDrives/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(1)))
@@ -104,31 +103,31 @@ public class NoteBookControllerTests {
                 .andExpect(jsonPath("$.company", is("Intel")))
                 .andExpect(jsonPath("$.price", is(10000)))
                 .andExpect(jsonPath("$.quantity", is(1)))
-                .andExpect(jsonPath("$.size", is(14)));
+                .andExpect(jsonPath("$.capacity", is(150)));
     }
 
     @Test
-    @DisplayName("GET /v01/NoteBooks/1 - Not Found")
-    void testGetNoteBooksByIdNotFound() throws Exception {
+    @DisplayName("GET /v01/HardDrives/1 - Not Found")
+    void testGetHardDrivesByIdNotFound() throws Exception {
 
-        doReturn(Optional.empty()).when(noteBookService).read(1L);
+        doReturn(Optional.empty()).when(hardDriveService).read(1L);
 
-        mockMvc.perform(get("/v01/NoteBooks/{id}", 1L))
+        mockMvc.perform(get("/v01/HardDrives/{id}", 1L))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    @DisplayName("PUT /v01/NoteBooks/1 ")
-    void testUpdateNoteBooks() throws Exception {
-        NoteBook noteBookToPut = new NoteBook(1L, "SER01-001", "Intel", 10000, 1, 14);
-        NoteBook noteBookToReturnSave = new NoteBook(1L, "NewSER01-001", "NewCompany", 10000, 1, 14);
+    @DisplayName("PUT /v01/HardDrives/1 ")
+    void testUpdateHardDrives() throws Exception {
+        HardDrive HardDriveToPut = new HardDrive(1L, "SER01-001", "Intel", 10000, 1, 14);
+        HardDrive HardDriveToReturnSave = new HardDrive(1L, "NewSER01-001", "NewCompany", 10000, 1, 14);
 
-        doReturn(noteBookToPut).when(noteBookRepository).save(noteBookToPut);
-        doReturn(true).when(noteBookService).update(noteBookToReturnSave, 1L);
+        doReturn(HardDriveToPut).when(hardDriveRepository).save(HardDriveToPut);
+        doReturn(true).when(hardDriveService).update(HardDriveToReturnSave, 1L);
 
-        mockMvc.perform(put("/v01/NoteBooks/{id}", 1L)
+        mockMvc.perform(put("/v01/HardDrives/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(noteBookToReturnSave)))
+                        .content(asJsonString(HardDriveToReturnSave)))
 
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
@@ -136,35 +135,35 @@ public class NoteBookControllerTests {
                 .andExpect(jsonPath("$.company", is("NewCompany")))
                 .andExpect(jsonPath("$.price", is(10000)))
                 .andExpect(jsonPath("$.quantity", is(1)))
-                .andExpect(jsonPath("$.size", is(14)));
+                .andExpect(jsonPath("$.capacity", is(14)));
 
     }
 
     @Test
-    @DisplayName("PUT /v01/NoteBooks/1 -- NotFound")
-    void testUpdateNoteBooksNotFound() throws Exception {
-        NoteBook noteBookToPut = new NoteBook(1L, "SER01-001", "Intel", 10000, 1, 14);
-        NoteBook noteBookToReturnSave = new NoteBook(1L, "NewSER01-001", "NewCompany", 10000, 1, 14);
+    @DisplayName("PUT /v01/HardDrives/1 -- NotFound")
+    void testUpdateHardDrivesNotFound() throws Exception {
+        HardDrive HardDriveToPut = new HardDrive(1L, "SER01-001", "Intel", 10000, 1, 14);
+        HardDrive HardDriveToReturnSave = new HardDrive(1L, "NewSER01-001", "NewCompany", 10000, 1, 14);
 
-        doReturn(noteBookToPut).when(noteBookRepository).save(noteBookToPut);
-        doReturn(false).when(noteBookService).update(noteBookToReturnSave, 2L);
+        doReturn(HardDriveToPut).when(hardDriveRepository).save(HardDriveToPut);
+        doReturn(false).when(hardDriveService).update(HardDriveToReturnSave, 2L);
 
-        mockMvc.perform(put("/v01/NoteBooks/{id}", 2L)
+        mockMvc.perform(put("/v01/HardDrives/{id}", 2L)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(noteBookToReturnSave)))
+                        .content(asJsonString(HardDriveToReturnSave)))
 
                 .andExpect(status().isNotModified());
 
     }
 
     @Test
-    @DisplayName("DELETE /v01/NoteBooks/1 ")
-    void testDeleteNoteBooks() throws Exception {
-        NoteBook noteBookToPut = new NoteBook(1L, "SER01-001", "Intel", 10000, 1, 14);
-        doReturn(noteBookToPut).when(noteBookRepository).save(noteBookToPut);
-        doReturn(true).when(noteBookService).delete(1L);
+    @DisplayName("DELETE /v01/HardDrives/1 ")
+    void testDeleteHardDrives() throws Exception {
+        HardDrive HardDriveToPut = new HardDrive(1L, "SER01-001", "Intel", 10000, 1, 14);
+        doReturn(HardDriveToPut).when(hardDriveRepository).save(HardDriveToPut);
+        doReturn(true).when(hardDriveService).delete(1L);
 
-        mockMvc.perform(delete("/v01/NoteBooks/{id}", 1L)
+        mockMvc.perform(delete("/v01/HardDrives/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))
 
                 .andExpect(status().isOk());
@@ -172,10 +171,10 @@ public class NoteBookControllerTests {
 
     @Test
     @DisplayName("DELETE /v01/PersonalComputers/1  - Not Modified")
-    void testDeleteNoteBooksNotModified() throws Exception {
-        NoteBook noteBookToPut = new NoteBook(1L, "SER01-001", "Intel", 10000, 1, 14);
-        doReturn(noteBookToPut).when(noteBookRepository).save(noteBookToPut);
-        doReturn(true).when(noteBookService).delete(1L);
+    void testDeleteHardDrivesNotModified() throws Exception {
+        HardDrive HardDriveToPut = new HardDrive(1L, "SER01-001", "Intel", 10000, 1, 14);
+        doReturn(HardDriveToPut).when(hardDriveRepository).save(HardDriveToPut);
+        doReturn(true).when(hardDriveService).delete(1L);
 
         mockMvc.perform(delete("/v01/PersonalComputers/{id}", 4L)
                         .contentType(MediaType.APPLICATION_JSON))

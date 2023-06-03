@@ -29,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class PersonalComputersControllerTests {
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private MockMvc mockMvc;
 
@@ -112,7 +113,7 @@ public class PersonalComputersControllerTests {
     @DisplayName("GET /v01/PersonalComputers/1 - Not Found")
     void testGetPersonalComputerByIdNotFound() throws Exception {
 
-        doReturn(Optional.empty()).when(computerService).read(1l);
+        doReturn(Optional.empty()).when(computerService).read(1L);
 
         mockMvc.perform(get("/v01/PersonalComputers/{id}", 1L))
                 // Validate the response code
@@ -128,7 +129,7 @@ public class PersonalComputersControllerTests {
         doReturn(personalComputerToPut).when(personalComputerRepository).save(personalComputerToPut);
         doReturn(true).when(computerService).update(personalComputerToReturnSave, 1L);
 
-        mockMvc.perform(put("/v01/PersonalComputers/{id}", 1l)
+        mockMvc.perform(put("/v01/PersonalComputers/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(personalComputerToReturnSave)))
 
@@ -151,7 +152,7 @@ public class PersonalComputersControllerTests {
         doReturn(personalComputerToPut).when(personalComputerRepository).save(personalComputerToPut);
         doReturn(true).when(computerService).update(personalComputerToReturnSave, 1L);
 
-        mockMvc.perform(put("/v01/PersonalComputers/{id}", 2l)
+        mockMvc.perform(put("/v01/PersonalComputers/{id}", 2L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(personalComputerToReturnSave)))
 
@@ -166,7 +167,7 @@ public class PersonalComputersControllerTests {
         doReturn(personalComputerToPut).when(personalComputerRepository).save(personalComputerToPut);
         doReturn(true).when(computerService).delete(1L);
 
-        mockMvc.perform(delete("/v01/PersonalComputers/{id}", 1l)
+        mockMvc.perform(delete("/v01/PersonalComputers/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))
 
                 .andExpect(status().isOk());
@@ -179,7 +180,7 @@ public class PersonalComputersControllerTests {
         doReturn(personalComputerToPut).when(personalComputerRepository).save(personalComputerToPut);
         doReturn(true).when(computerService).delete(1L);
 
-        mockMvc.perform(delete("/v01/PersonalComputers/{id}", 3l)
+        mockMvc.perform(delete("/v01/PersonalComputers/{id}", 3L)
                         .contentType(MediaType.APPLICATION_JSON))
 
                 .andExpect(status().isNotModified());
