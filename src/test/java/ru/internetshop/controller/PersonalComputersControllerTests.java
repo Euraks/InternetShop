@@ -103,7 +103,6 @@ public class PersonalComputersControllerTests {
     @DisplayName("PUT /v01/PersonalComputers/1")
     void testUpdatePersonalComputer() throws Exception {
         PersonalComputer personalComputerToPut = new PersonalComputer(1L, "SER01-001", "Intel", 10000, 1, "PC");
-        PersonalComputer personalComputerFindBy = new PersonalComputer(1L, "SER01-001", "Intel", 10000, 1, "PC");
         PersonalComputer personalComputerToReturnSave = new PersonalComputer(1L, "NewSER01-001", "NewCompany", 10000, 1, "NewFormFactor");
 
         doReturn(personalComputerToPut).when(personalComputerRepository).save(personalComputerToPut);
