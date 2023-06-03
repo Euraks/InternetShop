@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import ru.internetshop.model.PersonalComputer;
 import ru.internetshop.service.impl.PersonalComputerServiceImpl;
 
+import java.util.Optional;
+
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -73,7 +75,16 @@ public class PersonalComputersControllerTests {
                 .andExpect(jsonPath("$[2].price", is(30000)))
                 .andExpect(jsonPath("$[2].quantity", is(1)))
                 .andExpect(jsonPath("$[2].formFactor", is("PC")));
-//
+    }
+
+    @Test
+    @DisplayName("GET /v01/PersonalComputers/1 - Not Found")
+    void testGetWidgetByIdNotFound() throws Exception {
+        doReturn(Optional.empty()).when(computerService).read(1l);
+
+        mockMvc.perform(get("/v01/PersonalComputers/{id}", 1L))
+                // Validate the response code
+                .andExpect(status().isNotFound());
     }
 
     static String asJsonString(final Object obj) {
