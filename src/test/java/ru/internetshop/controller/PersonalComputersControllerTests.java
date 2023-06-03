@@ -122,6 +122,23 @@ public class PersonalComputersControllerTests {
 
     }
 
+    @Test
+    @DisplayName("PUT /v01/PersonalComputers/1 -- NotFound")
+    void testUpdatePersonalComputerNotFound() throws Exception {
+        PersonalComputer personalComputerToPut = new PersonalComputer(1L, "SER01-001", "Intel", 10000, 1, "PC");
+        PersonalComputer personalComputerToReturnSave = new PersonalComputer(1L, "NewSER01-001", "NewCompany", 10000, 1, "NewFormFactor");
+
+        doReturn(personalComputerToPut).when(personalComputerRepository).save(personalComputerToPut);
+        doReturn(true).when(computerService).update(personalComputerToReturnSave, 1L);
+
+        mockMvc.perform(put("/v01/PersonalComputers/{id}", 2l)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(personalComputerToReturnSave)))
+
+                .andExpect(status().isNotModified());
+
+    }
+
     static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
