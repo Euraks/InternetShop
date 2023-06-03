@@ -28,7 +28,7 @@ public class HardDriveController {
     @PostMapping(value = "/HardDrives")
     public ResponseEntity<?> create(@RequestBody HardDrive hardDrive) {
         hardDriveService.create(hardDrive);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(hardDrive,HttpStatus.CREATED);
     }
 
     @Operation(
@@ -37,10 +37,10 @@ public class HardDriveController {
             tags = {"Get All HardDrive", "get"})
     @GetMapping(value = "/HardDrives")
     public ResponseEntity<List<HardDrive>> read() {
-        final List<HardDrive> personalComputers = hardDriveService.readAll();
+        final List<HardDrive> hardDrive = hardDriveService.readAll();
 
-        return !personalComputers.isEmpty()
-                ? new ResponseEntity<>(personalComputers, HttpStatus.OK)
+        return !hardDrive.isEmpty()
+                ? new ResponseEntity<>(hardDrive, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -67,7 +67,7 @@ public class HardDriveController {
         final boolean updated = hardDriveService.update(hardDrive, id);
 
         return updated
-                ? new ResponseEntity<>(HttpStatus.OK)
+                ? new ResponseEntity<>(hardDrive,HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 

@@ -28,7 +28,7 @@ public class MonitorController {
     @PostMapping(value = "/Monitors")
     public ResponseEntity<?> create(@RequestBody Monitor monitor) {
         monitorService.create(monitor);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(monitor,HttpStatus.CREATED);
     }
 
     @Operation(
@@ -67,7 +67,7 @@ public class MonitorController {
         final boolean updated = monitorService.update(monitor, id);
 
         return updated
-                ? new ResponseEntity<>(HttpStatus.OK)
+                ? new ResponseEntity<>(monitor,HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
