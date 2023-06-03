@@ -28,7 +28,7 @@ public class NoteBookController {
     @PostMapping(value = "/NoteBooks")
     public ResponseEntity<?> create(@RequestBody NoteBook noteBook) {
         noteBookService.create(noteBook);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(noteBook,HttpStatus.CREATED);
     }
 
     @Operation(
@@ -37,10 +37,10 @@ public class NoteBookController {
             tags = { "Get All NoteBook", "get" })
     @GetMapping(value = "/NoteBooks")
     public ResponseEntity<List<NoteBook>> read() {
-        final List<NoteBook> personalComputers = noteBookService.readAll();
+        final List<NoteBook> noteBook = noteBookService.readAll();
 
-        return !personalComputers.isEmpty()
-                ? new ResponseEntity<>(personalComputers, HttpStatus.OK)
+        return !noteBook.isEmpty()
+                ? new ResponseEntity<>(noteBook, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -67,7 +67,7 @@ public class NoteBookController {
         final boolean updated = noteBookService.update(noteBook, id);
 
         return updated
-                ? new ResponseEntity<>(HttpStatus.OK)
+                ? new ResponseEntity<>(noteBook,HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
