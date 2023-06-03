@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.internetshop.model.PersonalComputer;
@@ -158,6 +157,32 @@ public class PersonalComputersControllerTests {
 
                 .andExpect(status().isNotModified());
 
+    }
+
+    @Test
+    @DisplayName("DELETE /v01/PersonalComputers/1 ")
+    void testDeletePersonalComputer() throws Exception {
+        PersonalComputer personalComputerToPut = new PersonalComputer(1L, "SER01-001", "Intel", 10000, 1, "PC");
+        doReturn(personalComputerToPut).when(personalComputerRepository).save(personalComputerToPut);
+        doReturn(true).when(computerService).delete(1L);
+
+        mockMvc.perform(delete("/v01/PersonalComputers/{id}", 1l)
+                        .contentType(MediaType.APPLICATION_JSON))
+
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("DELETE /v01/PersonalComputers/1  - Not Modified")
+    void testDeletePersonalComputerNotModified() throws Exception {
+        PersonalComputer personalComputerToPut = new PersonalComputer(1L, "SER01-001", "Intel", 10000, 1, "PC");
+        doReturn(personalComputerToPut).when(personalComputerRepository).save(personalComputerToPut);
+        doReturn(true).when(computerService).delete(1L);
+
+        mockMvc.perform(delete("/v01/PersonalComputers/{id}", 3l)
+                        .contentType(MediaType.APPLICATION_JSON))
+
+                .andExpect(status().isNotModified());
     }
 
     static String asJsonString(final Object obj) {
