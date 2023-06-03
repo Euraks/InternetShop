@@ -16,8 +16,9 @@ public class PersonalComputerServiceImpl implements ServiceInterface<PersonalCom
     PersonalComputerRepository repository;
 
     @Override
-    public void create(PersonalComputer personalComputer) {
+    public PersonalComputer create(PersonalComputer personalComputer) {
         repository.save(personalComputer);
+        return personalComputer;
     }
 
     @Override

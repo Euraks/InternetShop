@@ -16,8 +16,9 @@ public class NoteBookServiceInterfaceImpl implements ServiceInterface<NoteBook> 
     NoteBookRepository repository;
 
     @Override
-    public void create(NoteBook noteBook) {
+    public NoteBook create(NoteBook noteBook) {
         repository.save(noteBook);
+        return noteBook;
     }
 
     @Override

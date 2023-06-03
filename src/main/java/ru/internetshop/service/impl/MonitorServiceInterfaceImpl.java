@@ -16,8 +16,9 @@ public class MonitorServiceInterfaceImpl implements ServiceInterface<Monitor> {
     MonitorRepository repository;
 
     @Override
-    public void create(Monitor monitor) {
+    public Monitor create(Monitor monitor) {
         repository.save(monitor);
+        return monitor;
     }
 
     @Override

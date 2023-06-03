@@ -11,7 +11,7 @@ public interface ServiceInterface<T extends Product> {
      *
      * @param type - PersonalComputer to create
      */
-    void create(T type);
+    T create(T type);
 
     /**
      * Return all <T>

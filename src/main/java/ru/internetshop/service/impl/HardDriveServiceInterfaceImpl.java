@@ -16,8 +16,9 @@ public class HardDriveServiceInterfaceImpl implements ServiceInterface<HardDrive
     HardDriveRepository repository;
 
     @Override
-    public void create(HardDrive type) {
-        repository.save(type);
+    public HardDrive create(HardDrive hardDrive) {
+        repository.save(hardDrive);
+        return hardDrive;
     }
 
     @Override
