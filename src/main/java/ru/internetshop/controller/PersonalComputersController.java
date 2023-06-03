@@ -25,9 +25,9 @@ public class PersonalComputersController {
                     " the JSON format according to the model",
             tags = {"Personal Computer", "post"})
     @PostMapping(value = "/PersonalComputers")
-    public ResponseEntity<?> create(@RequestBody PersonalComputer personalComputer) {
+    public ResponseEntity<PersonalComputer> create(@RequestBody PersonalComputer personalComputer) {
         personalComputerService.create(personalComputer);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(personalComputer,HttpStatus.CREATED);
     }
 
     @Operation(
@@ -62,11 +62,11 @@ public class PersonalComputersController {
                     " the JSON format according to the model and Id to request param",
             tags = {"Update Personal Computer for Id", "put"})
     @PutMapping(value = "/PersonalComputers/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody PersonalComputer personalComputer) {
+    public ResponseEntity<PersonalComputer> update(@PathVariable(name = "id") long id, @RequestBody PersonalComputer personalComputer) {
         final boolean updated = personalComputerService.update(personalComputer, id);
 
         return updated
-                ? new ResponseEntity<>(HttpStatus.OK)
+                ? new ResponseEntity<>(personalComputer,HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
