@@ -1,54 +1,54 @@
 DROP TABLE IF EXISTS hard_drive;
-drop table if exists monitor;
-drop table if exists note_book;
-drop table if exists personal_computer;
+DROP TABLE IF EXISTS monitor;
+DROP TABLE IF EXISTS note_book;
+DROP TABLE IF EXISTS personal_computer;
 
-drop sequence if exists hard_drive_seq;
-drop sequence if exists monitor_seq;
-drop sequence if exists note_book_seq;
-drop sequence if exists personal_computer_seq;
+DROP SEQUENCE  IF EXISTS hard_drive_seq;
+DROP SEQUENCE  IF EXISTS monitor_seq;
+DROP SEQUENCE  IF EXISTS note_book_seq;
+DROP SEQUENCE  IF EXISTS personal_computer_seq;
 
-create table hard_drive
+CREATE TABLE hard_drive
 (
-    id            bigint not null,
-    company       varchar(255),
-    price         integer,
-    quantity      integer,
-    serial_number varchar(255),
-    capacity      integer,
-    primary key (id)
+    id            BIGINT NOT NULL ,
+    company       VARCHAR(255),
+    price         INTEGER,
+    quantity      INTEGER,
+    serial_number VARCHAR(255),
+    capacity      INTEGER,
+    PRIMARY KEY (id)
 );
-create table monitor
+CREATE TABLE monitor
 (
-    id            bigint not null,
-    company       varchar(255),
-    price         integer,
-    quantity      integer,
-    serial_number varchar(255),
-    diagonal      integer,
-    primary key (id)
+    id            BIGINT NOT NULL ,
+    company       VARCHAR(255),
+    price         INTEGER,
+    quantity      INTEGER,
+    serial_number VARCHAR(255),
+    diagonal      INTEGER,
+    PRIMARY KEY (id)
 );
-create table note_book
+CREATE TABLE note_book
 (
-    id            bigint not null,
-    company       varchar(255),
-    price         integer,
-    quantity      integer,
-    serial_number varchar(255),
-    size          integer,
-    primary key (id)
+    id            BIGINT NOT NULL ,
+    company       VARCHAR(255),
+    price         INTEGER,
+    quantity      INTEGER,
+    serial_number VARCHAR(255),
+    size          INTEGER,
+    PRIMARY KEY (id)
 );
-create table personal_computer
+CREATE TABLE personal_computer
 (
-    id            bigint not null,
-    company       varchar(255),
-    price         integer,
-    quantity      integer,
-    serial_number varchar(255),
-    "form-factor" varchar(255),
-    primary key (id)
+    id            BIGINT NOT NULL ,
+    company       VARCHAR(255),
+    price         INTEGER,
+    quantity      INTEGER,
+    serial_number VARCHAR(255),
+    "form-factor" VARCHAR(255),
+    PRIMARY KEY (id)
 );
-create sequence hard_drive_seq start with 1 increment by 50;
-create sequence monitor_seq start with 1 increment by 50;
-create sequence note_book_seq start with 1 increment by 50;
-create sequence personal_computer_seq start with 1 increment by 50;
+CREATE SEQUENCE hard_drive_seq START WITH 1 INCREMENT BY  50;
+CREATE SEQUENCE monitor_seq START WITH 1 INCREMENT BY 50;
+CREATE SEQUENCE note_book_seq START WITH 1 INCREMENT BY 50;
+CREATE SEQUENCE personal_computer_seq START WITH 1 INCREMENT BY 50;
